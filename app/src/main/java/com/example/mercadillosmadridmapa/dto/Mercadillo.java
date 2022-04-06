@@ -12,6 +12,8 @@ public class Mercadillo {
         private Location location;
 
 
+
+
         public Mercadillo()
         {
 

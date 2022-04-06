@@ -46,26 +46,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private Spinner spinner;
     private String[] opciones = {"",
-            "ARGANZUELA",
-            "BARAJAS",
-            "CARABANCHEL",
-            "CENTRO",
-            "CHAMARTIN",
-            "CHAMBERI",
-            "CIUDAD LINEAL",
-            "FUENCARRAL-EL PARDO",
-            "HORTALEZA",
-            "LATINA",
-            "MONCLOA-ARAVACA",
-            "MORATALAZ",
-            "PUENTE DE VALLECAS",
-            "RETIRO",
-            "SALAMANCA",
-            "SAN BLAS-CANILLEJAS",
-            "USERA",
-            "VICALVARO",
-            "VILLA DE VALLECAS",
-            "VILLAVERDE"};
+            "",
+            };
 
 
 
@@ -114,10 +96,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         // Add a marker in Sydney and move the camera
 
+        mMap.setMinZoomPreference(10.0f);
+        mMap.setMaxZoomPreference(15.0f);
+        mMap.getMinZoomLevel();
+
       //  for mercadillo en mercadillos {
-            LatLng madrid = new LatLng(40.4165, -3.70256);
+         //   LatLng madrid = new LatLng(40.4165, -3.70256);
           //  mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(madrid));
+         //   mMap.moveCamera(CameraUpdateFactory.newLatLng(madrid));
        // }
 
     }
@@ -153,7 +139,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
            for (int i=0; i<listaMercadillos.length; i++){
                LatLng flag = new LatLng(listaMercadillos[i].getLocation().getLatitude(), listaMercadillos[i].getLocation().getLongitude());
-               mMap.addMarker(new MarkerOptions().position(flag).title(listaMercadillos[i].getTitle()).snippet(listaMercadillos[i].getOrganization().getSchedule()));
+               mMap.addMarker(new MarkerOptions().position(flag).title(listaMercadillos[i].getTitle())
+                       .snippet(listaMercadillos[i].getAddress().getStreetAddress() + "   -    " + listaMercadillos[i].getOrganization().getSchedule()));
                mMap.moveCamera(CameraUpdateFactory.newLatLng(flag));
            }
 
