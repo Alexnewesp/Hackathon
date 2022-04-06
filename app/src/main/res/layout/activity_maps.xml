@@ -8,39 +8,50 @@
     android:layout_height="match_parent"
     tools:context=".MapsActivity">
 
-<Spinner
-android:id="@+id/spinnerv"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:layout_margin="20dp"
-/>
+    <Spinner
+        android:id="@+id/spinnerv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp" />
 
-<TextView
-android:id="@+id/nresultados"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:layout_marginTop="12dp"
-android:textSize="32sp"
-android:gravity="center"
-></TextView>
+    <TextView
+        android:id="@+id/nresultados"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:textSize="32sp"></TextView>
 
-<FrameLayout
-android:layout_marginTop="16dp"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
 
-<androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/rvc"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintHorizontal_bias="0.5"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toTopOf="parent"
+            tools:layout_conversion_absoluteHeight="0dp"
+            tools:layout_conversion_absoluteWidth="0dp"></androidx.recyclerview.widget.RecyclerView>
 
-<ProgressBar
-    android:id="@+id/pbc"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:visibility="invisible"></ProgressBar>
+        <ProgressBar
+            android:id="@+id/pbc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintHorizontal_bias="0.5"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toTopOf="parent"
+            tools:layout_conversion_absoluteHeight="0dp"
+            tools:layout_conversion_absoluteWidth="0dp"></ProgressBar>
 
-</FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </fragment>

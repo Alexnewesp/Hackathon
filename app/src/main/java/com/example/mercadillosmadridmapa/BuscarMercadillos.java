@@ -17,15 +17,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 
 public class BuscarMercadillos extends AsyncTaskLoader<Mercadillos> {
 
-    //  private String distrito;
-    private final static String URL_API_MERCADILLOS_MADRID = "https://datos.madrid.es/egob/catalogo/202105-0-mercadillos.json";
+      private String distrito;
+    private final static String URL_API_MERCADILLOS_MADRID = "https://datos.madrid.es/egob/catalogo/202105-0-mercadillos.json?distrito_nombre=";
 
-    public BuscarMercadillos(@NonNull Context context/*, String distrito*/) {
+    public BuscarMercadillos(@NonNull Context context, String distrito) {
         super(context);
-        //      this.distrito = distrito;
+              this.distrito = distrito;
       //  Log.d(MainActivity.ETIQUETA_LOG, "BusquedaEventos constructor");
     }
 
@@ -48,11 +49,11 @@ public class BuscarMercadillos extends AsyncTaskLoader<Mercadillos> {
 
         try {
             // display districts
-            //   distrito = URLEncoder.encode(distrito, "UTF-8");
-            //   distrito = URL_API_EVENTOS_MADRID_POR_DISTRITO + distrito;
+              distrito = URLEncoder.encode(distrito, "UTF-8");
+              url = new URL(URL_API_MERCADILLOS_MADRID + distrito);
 
         //    Log.d(MainActivity.ETIQUETA_LOG, "Llamando a " + URL_API_MERCADILLOS_MADRID);
-            url = new URL(URL_API_MERCADILLOS_MADRID);
+        //    url = new URL(URL_API_MERCADILLOS_MADRID);
             httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
 

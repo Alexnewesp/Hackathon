@@ -20,6 +20,7 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mercadillosmadridmapa.dto.Mercadillo;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -41,8 +42,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private RecyclerView.Adapter adapter;
     private TextView nresultados;
 
+    private Mercadillo[] listaMercadillos = null;
+
     private Spinner spinner;
-    private String[] opciones = {"ARGANZUELA", "BARAJAS", "CARABANCHEL", "CENTRO", "CHAMARTIN", "CHAMBERI",
+    private String[] opciones = {"",
+            "ARGANZUELA",
+            "BARAJAS",
+            "CARABANCHEL",
+            "CENTRO",
+            "CHAMARTIN",
+            "CHAMBERI",
             "CIUDAD LINEAL",
             "FUENCARRAL-EL PARDO",
             "HORTALEZA",
@@ -53,8 +62,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             "RETIRO",
             "SALAMANCA",
             "SAN BLAS-CANILLEJAS",
-            "USERA","VICALVARO",
-            "VILLA DE VALLECAS","VILLAVERDE"};
+            "USERA",
+            "VICALVARO",
+            "VILLA DE VALLECAS",
+            "VILLAVERDE"};
 
 
 
@@ -104,15 +115,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker in Sydney and move the camera
 
       //  for mercadillo en mercadillos {
-            LatLng sydney = new LatLng(-34, 151);
-            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            LatLng madrid = new LatLng(40.4165, -3.70256);
+          //  mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(madrid));
        // }
 
     }
-
-
-
 
 
     @NonNull
@@ -120,10 +128,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public Loader<Mercadillos> onCreateLoader(int id, @Nullable Bundle args) {
 
         BuscarMercadillos buscarMercadillos = null;
-
-        buscarMercadillos = new BuscarMercadillos(this /*,distro*/);
-
-
+        buscarMercadillos = new BuscarMercadillos(this , distrito);
         return buscarMercadillos;
     }
 
@@ -131,20 +136,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onLoadFinished(@NonNull Loader<Mercadillos> loader, Mercadillos mercadillos) {
 
-    //   Log.d(MainActivity.ETIQUETA_LOG, "onLoadFinished");
+    /*  Log.d(MainActivity.ETIQUETA_LOG, "onLoadFinished");
         //Log.d(MainActivity.ETIQUETA_LOG, "Listado recibido eventos= " + rc.toString());
         StringBuilder stringBuilder = new StringBuilder();
-
         mercadillos.getlista_mercadillos().forEach(e -> {
             Log.d(ETIQUETA_LOG, e.getTitle());
             stringBuilder.append(e.getTitle()+"\n");
 
-        });
+        });*/
+
+       listaMercadillos = mercadillos.getlista_mercadillos().toArray(new Mercadillo[0]);
+
+       if (listaMercadillos != null){
+
+           mMap.clear();
+
+           for (int i=0; i<listaMercadillos.length; i++){
+               LatLng flag = new LatLng(listaMercadillos[i].getLocation().getLatitude(), listaMercadillos[i].getLocation().getLongitude());
+               mMap.addMarker(new MarkerOptions().position(flag).title(listaMercadillos[i].getTitle()).snippet(listaMercadillos[i].getOrganization().getSchedule()));
+               mMap.moveCamera(CameraUpdateFactory.newLatLng(flag));
+           }
+
+
+       }
 
         this.progressBar.setVisibility(View.INVISIBLE);
 
         // return results
-        Toast.makeText(this, stringBuilder.toString(), Toast.LENGTH_LONG).show();
+     //   Toast.makeText(this, stringBuilder.toString(), Toast.LENGTH_LONG).show();
 
     }
 
@@ -164,13 +183,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
       //  Log.d(MainActivity.ETIQUETA_LOG, "Opción nueva seleccionada en el spinner");
         TextView textView = (TextView)view;
-        //      distrito = textView.getText().toString();
+        distrito = textView.getText().toString();
      //   Log.d(MainActivity.ETIQUETA_LOG, "Opción tocada " + textView.getText().toString());
         if (RedUtil.hayInternet(this)) {
 
             //CON AsyncTaskLoader
             LoaderManager lm = LoaderManager.getInstance(this);
-            lm.initLoader(37, null, this);
+            lm.restartLoader(37, null, this);
 
         } else {
       //      Log.d(MainActivity.ETIQUETA_LOG, "NO HAY INTERNET");
