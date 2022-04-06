@@ -8,6 +8,7 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.icu.text.CaseMap;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,12 +27,13 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.mercadillosmadridmapa.databinding.ActivityMapsBinding;
 
 import com.example.mercadillosmadridmapa.dto.Mercadillos;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LoaderManager.LoaderCallbacks<Mercadillos>, AdapterView.OnItemSelectedListener {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LoaderManager.LoaderCallbacks<Mercadillos>, AdapterView.OnItemSelectedListener, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
@@ -99,6 +101,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setMinZoomPreference(10.0f);
         mMap.setMaxZoomPreference(15.0f);
         mMap.getMinZoomLevel();
+        mMap.setOnMarkerClickListener(this);
 
       //  for mercadillo en mercadillos {
          //   LatLng madrid = new LatLng(40.4165, -3.70256);
@@ -107,6 +110,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
        // }
 
     }
+
 
 
     @NonNull
@@ -188,5 +192,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         //SERÍA INVOCADA CUANDO CAMBIA EL ADAPTER Y UNA OPCIÓN SELECCIONADA DEJA DE ESTAR DISPONIBLE
+    }
+
+    @Override
+    public boolean onMarkerClick(@NonNull Marker marker) {
+        String Title = marker.getTitle();
+        for (int i=0; i<listaMercadillos.length; i++){
+            String Title2 = listaMercadillos[i].getTitle();
+            if (Title.equals(Title2)){
+                Toast.makeText(this,
+                        listaMercadillos[i].getOrganization().getServices() + "\n\n"
+                                + listaMercadillos[i].getOrganization().getDesc()+ "\n\n"
+                                + listaMercadillos[i].getAddress().getStreetAddress() + "\n"
+                        +  listaMercadillos[i].getAddress().getPostalCode() + "\n"
+
+                        , Toast.LENGTH_LONG).show();
+            }
+        }
+
+
+        return false;
     }
 }
