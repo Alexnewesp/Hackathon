@@ -2,11 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mercadillosmadridmapa">
 
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MercadillosMadridMapa">
-
+        <activity
+            android:name=".MapsActivity"
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -28,14 +28,13 @@
              "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
 
         AIzaSyC_H_Ms9WNpzLjg8KiDSCGnHKjVtWtNca8
-
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:label="@string/title_activity_maps">
             <intent-filter>
