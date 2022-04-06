@@ -143,8 +143,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
            for (int i=0; i<listaMercadillos.length; i++){
                LatLng flag = new LatLng(listaMercadillos[i].getLocation().getLatitude(), listaMercadillos[i].getLocation().getLongitude());
-               mMap.addMarker(new MarkerOptions().position(flag).title(listaMercadillos[i].getTitle())
-                       .snippet(listaMercadillos[i].getAddress().getStreetAddress() + "   -    " + listaMercadillos[i].getOrganization().getSchedule()));
+               mMap.addMarker(new MarkerOptions().position(flag).title(listaMercadillos[i].getTitle()));
                mMap.moveCamera(CameraUpdateFactory.newLatLng(flag));
            }
 
@@ -201,11 +200,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             String Title2 = listaMercadillos[i].getTitle();
             if (Title.equals(Title2)){
                 Toast.makeText(this,
-                        listaMercadillos[i].getOrganization().getServices() + "\n\n"
-                                + listaMercadillos[i].getOrganization().getDesc()+ "\n\n"
-                                + listaMercadillos[i].getAddress().getStreetAddress() + "\n"
-                        +  listaMercadillos[i].getAddress().getPostalCode() + "\n"
-
+                        "Servicios:   " + listaMercadillos[i].getOrganization().getServices() + "\n\n"
+                                + "Trasnsporte:   " +listaMercadillos[i].getOrganization().getDesc()+ "\n\n"
+                                + "Dirección:   " + listaMercadillos[i].getAddress().getStreetAddress()
+                        +  listaMercadillos[i].getAddress().getPostalCode() + "\n" + "Horario:  " +
+                                listaMercadillos[i].getOrganization().getSchedule()
                         , Toast.LENGTH_LONG).show();
             }
         }
