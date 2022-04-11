@@ -8,10 +8,8 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.icu.text.CaseMap;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -42,7 +40,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private TextView nresultados;
+    private TextView nresultados, labSer, labHor, labTran, labDir;
 
     private Mercadillo[] listaMercadillos = null;
 
@@ -69,6 +67,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
 
+       // this.labTran = findViewById(R.id.disTransporte);
+        this.labHor = findViewById(R.id.disHorario);
+        this.labSer = findViewById(R.id.disServicios);
+       // this.labDir = findViewById(R.id.disDirrecion);
 
         this.progressBar = findViewById(R.id.pbc);
         this.recyclerView = findViewById(R.id.rvc);
@@ -143,7 +145,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
            for (int i=0; i<listaMercadillos.length; i++){
                LatLng flag = new LatLng(listaMercadillos[i].getLocation().getLatitude(), listaMercadillos[i].getLocation().getLongitude());
-               mMap.addMarker(new MarkerOptions().position(flag).title(listaMercadillos[i].getTitle()));
+               mMap.addMarker(new MarkerOptions().position(flag).title(listaMercadillos[i].getAddress().getStreetAddress()));
                mMap.moveCamera(CameraUpdateFactory.newLatLng(flag));
            }
 
@@ -197,15 +199,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public boolean onMarkerClick(@NonNull Marker marker) {
         String Title = marker.getTitle();
         for (int i=0; i<listaMercadillos.length; i++){
-            String Title2 = listaMercadillos[i].getTitle();
+            String Title2 = listaMercadillos[i].getAddress().getStreetAddress();
             if (Title.equals(Title2)){
-                Toast.makeText(this,
-                        "Servicios:   " + listaMercadillos[i].getOrganization().getServices() + "\n\n"
-                                + "Trasnsporte:   " +listaMercadillos[i].getOrganization().getDesc()+ "\n\n"
-                                + "Dirección:   " + listaMercadillos[i].getAddress().getStreetAddress()
-                        +  listaMercadillos[i].getAddress().getPostalCode() + "\n" + "Horario:  " +
-                                listaMercadillos[i].getOrganization().getSchedule()
-                        , Toast.LENGTH_LONG).show();
+
+                labSer.setText(listaMercadillos[i].getOrganization().getServices());
+               // labTran.setText(listaMercadillos[i].getOrganization().getDesc());
+               // labDir.setText(listaMercadillos[i].getAddress().getStreetAddress() + "- " + listaMercadillos[i].getAddress().getPostalCode());
+                labHor.setText(listaMercadillos[i].getOrganization().getSchedule());
+
             }
         }
 

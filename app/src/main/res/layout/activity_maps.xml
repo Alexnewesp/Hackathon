@@ -1,58 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
+    android:id="@+id/conLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MapsActivity">
+    android:layout_height="match_parent">
+
+    <androidx.fragment.app.FragmentContainerView
+
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".MapsActivity" />
+
+    <ProgressBar
+        android:id="@+id/pbc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/rvc"
+        app:layout_constraintStart_toStartOf="parent"></ProgressBar>
 
     <Spinner
         android:id="@+id/spinnerv"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp" />
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/pbc"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/nresultados"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></TextView>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:gravity="center"
-        android:textSize="32sp"></TextView>
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        app:cardCornerRadius="10dp"
+        app:cardPreventCornerOverlap="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/frameLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="16dp">
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#EDFFFCFC"
+            android:orientation="vertical"
+            android:paddingStart="10sp"
+            android:paddingTop="5sp"
+            android:paddingEnd="10sp"
+            android:paddingBottom="5sp">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintHorizontal_bias="0.5"
-            map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toTopOf="parent"
-            tools:layout_conversion_absoluteHeight="0dp"
-            tools:layout_conversion_absoluteWidth="0dp"></androidx.recyclerview.widget.RecyclerView>
+            <LinearLayout
+                android:id="@+id/layHor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <ProgressBar
-            android:id="@+id/pbc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            map:layout_constraintBottom_toBottomOf="parent"
-            map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintHorizontal_bias="0.5"
-            map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toTopOf="parent"
-            tools:layout_conversion_absoluteHeight="0dp"
-            tools:layout_conversion_absoluteWidth="0dp"></ProgressBar>
+                <TextView
+                    android:id="@+id/labHorario"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_extrabold"
+                    android:text="Horario :"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/disHorario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_extrabold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/laySer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/labServicios"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_extrabold"
+                    android:text="Servicios :"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/disServicios"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_extrabold" />
+            </LinearLayout>
+
+            <!--     <LinearLayout
+               android:id="@+id/layDir"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal">
+
+               <TextView
+                   android:id="@+id/labDirrecion"
+                   android:layout_width="100dp"
+                   android:layout_height="wrap_content"
+                   android:fontFamily="@font/montserrat_extrabold"
+                   android:text="Dirección :"
+                   android:textSize="16sp"
+                   android:textStyle="bold" />
+
+               <TextView
+                   android:id="@+id/disDirrecion"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:fontFamily="@font/montserrat_extrabold" />
+           </LinearLayout>
+
+               <LinearLayout
+                 android:id="@+id/layTran"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+
+                 <TextView
+                     android:id="@+id/labTransporte"
+                     android:layout_width="100dp"
+                     android:layout_height="wrap_content"
+                     android:text="Transporte : " />
+
+                 <TextView
+                     android:id="@+id/disTransporte"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content" />
+           </LinearLayout>-->
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/map"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</fragment>
+</androidx.constraintlayout.widget.ConstraintLayout>
