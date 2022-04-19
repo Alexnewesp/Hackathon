@@ -1,17 +1,11 @@
 package com.example.mercadillosmadridmapa;
 
 import android.content.Context;
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.loader.content.AsyncTaskLoader;
-
-//import com.google.gson.Gson;
-
-import com.example.mercadillosmadridmapa.dto.Mercadillos;
+import com.example.mercadillosmadridmapa.dto.ResultList;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,14 +13,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class BuscarMercadillos extends AsyncTaskLoader<Mercadillos> {
+public class BuscarConApi extends AsyncTaskLoader<ResultList> {
 
-      private String distrito;
-    private final static String URL_API_MERCADILLOS_MADRID = "https://datos.madrid.es/egob/catalogo/202105-0-mercadillos.json?distrito_nombre=";
+    private String typeOfLocation, endpoint;
+    private final static String URL_API_MERCADILLOS_MADRID = "https://datos.madrid.es/egob/catalogo/";
 
-    public BuscarMercadillos(@NonNull Context context, String distrito) {
+    public BuscarConApi(@NonNull Context context, String typeOfLocation) {
         super(context);
-              this.distrito = distrito;
+              this.typeOfLocation = typeOfLocation;
       //  Log.d(MainActivity.ETIQUETA_LOG, "BusquedaEventos constructor");
     }
 
@@ -38,9 +32,47 @@ public class BuscarMercadillos extends AsyncTaskLoader<Mercadillos> {
 
     @Nullable
     @Override
-    public Mercadillos loadInBackground() {
+    public ResultList loadInBackground() {
         //Object resultadoCanciones = null;
-        Mercadillos mercadillos =null;
+        ResultList resultList =null;
+
+
+        if (typeOfLocation.equals("CENTROS CULTURALES")){
+            endpoint = "200304-0-centros-culturales.json";
+
+        } else if (typeOfLocation.equals("WiFi GRATIS")){
+            endpoint = "216619-0-wifi-municipal.json";
+
+        } else if (typeOfLocation.equals("MUSEOS")){
+            endpoint = "201132-0-museos.json";
+
+        } else if (typeOfLocation.equals("EDIFICIOS MONUMENTALES")){
+            endpoint = "208844-0-monumentos-edificios.json";
+
+        } else if (typeOfLocation.equals("MERCADILLOS")){
+          endpoint = "202105-0-mercadillos.json";
+
+        } else if (typeOfLocation.equals("PARQUES")){
+            endpoint = "200761-0-parques-jardines.json";
+
+        } else if (typeOfLocation.equals("BIBLIOTECAS")){
+            endpoint = "201747-0-bibliobuses-bibliotecas.json";
+
+        } else if (typeOfLocation.equals("PISCINAS")){
+            endpoint = "210227-0-piscinas-publicas.json";
+
+        } else if (typeOfLocation.equals("TEATROS")){
+            endpoint = "208862-7650046-ocio_salas.json";
+
+        } else if (typeOfLocation.equals("CINES")){
+            endpoint = "208862-7650164-ocio_salas.json";
+
+        } else if (typeOfLocation.equals("SALAS DE CONCIERTOS")){
+            endpoint = "208862-7650180-ocio_salas.json";
+
+        }
+
+
         //String info_eventos = null;
         URL url = null;
         HttpURLConnection httpURLConnection = null;
@@ -49,8 +81,8 @@ public class BuscarMercadillos extends AsyncTaskLoader<Mercadillos> {
 
         try {
             // display districts
-              distrito = URLEncoder.encode(distrito, "UTF-8");
-              url = new URL(URL_API_MERCADILLOS_MADRID + distrito);
+            endpoint = URLEncoder.encode(endpoint, "UTF-8");
+              url = new URL(URL_API_MERCADILLOS_MADRID + endpoint);
 
         //    Log.d(MainActivity.ETIQUETA_LOG, "Llamando a " + URL_API_MERCADILLOS_MADRID);
         //    url = new URL(URL_API_MERCADILLOS_MADRID);
@@ -71,7 +103,7 @@ public class BuscarMercadillos extends AsyncTaskLoader<Mercadillos> {
                 {
 
                     ObjectMapper mapper = new ObjectMapper();
-                    mercadillos = mapper.readValue(inputStreamReader, Mercadillos.class);
+                    resultList = mapper.readValue(inputStreamReader, ResultList.class);
           //          Log.d(MainActivity.ETIQUETA_LOG, "RX n mercadillos = " + mercadillos.getlista_mercadillos().size());
 
                 } catch (Exception e) {
@@ -100,6 +132,6 @@ public class BuscarMercadillos extends AsyncTaskLoader<Mercadillos> {
         }
 
 
-        return mercadillos;
+        return resultList;
     }
 }

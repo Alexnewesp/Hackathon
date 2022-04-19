@@ -3,7 +3,7 @@ package com.example.mercadillosmadridmapa.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Mercadillo {
+public class PointOfInterest {
 
 
         private String title;
@@ -12,14 +12,12 @@ public class Mercadillo {
         private Location location;
 
 
-
-
-        public Mercadillo()
+        public PointOfInterest()
         {
 
         }
 
-        public Mercadillo(String title, Address address, Organization organization, Location location) {
+        public PointOfInterest(String title, Address address, Organization organization, Location location) {
             this.title = title;
             this.address = address;
             this.organization = organization;

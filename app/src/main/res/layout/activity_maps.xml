@@ -6,164 +6,160 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#EFEFEF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/scrollView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerCard">
+
+            <Button
+                android:id="@+id/btnHor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/button_border"
+                android:fontFamily="@font/montserrat_extrabold"
+                android:gravity="center"
+                android:onClick="horarioSelected"
+                android:text="Horarios"
+                android:textColor="@android:color/tab_indicator_text" />
+
+            <Button
+                android:id="@+id/btnSer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/button_border"
+                android:fontFamily="@font/montserrat_extrabold"
+                android:gravity="center"
+                android:onClick="servicesSelected"
+                android:text="Servicios"
+                android:textColor="@android:color/tab_indicator_text" />
+
+            <Button
+                android:id="@+id/buttonAdd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/button_border"
+                android:fontFamily="@font/montserrat_extrabold"
+                android:gravity="center"
+                android:onClick="addressSelected"
+                android:text="Dirección"
+                android:textColor="@android:color/tab_indicator_text" />
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_border"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:minHeight="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_max="150dp"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/labDescription"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/montserrat_extrabold"
+                android:gravity="center"
+                android:textColor="@android:color/tab_indicator_text" />
+        </ScrollView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinnerCard"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:fontFamily="@font/montserrat_extrabold"
+            android:foregroundGravity="center"
+            android:textColor="@android:color/tab_indicator_text"
+            app:cardCornerRadius="2dp"
+            app:cardPreventCornerOverlap="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/nresultados"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="#EFEFEF"
+                android:fontFamily="@font/montserrat_extrabold"
+                android:foregroundGravity="center"
+                android:gravity="center"
+                android:textColor="@android:color/tab_indicator_text"
+                android:textSize="32sp" />
+
+            <Spinner
+                android:id="@+id/spinnerv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:fontFamily="@font/montserrat_extrabold"
+                android:foregroundGravity="center"
+                android:gravity="center"
+                android:minHeight="48dp"
+                android:padding="0dp"
+                android:textColor="@android:color/tab_indicator_text" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/button_border"
+                android:fontFamily="@font/montserrat_extrabold"
+                android:foregroundGravity="center"
+                android:textColor="@android:color/tab_indicator_text">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.fragment.app.FragmentContainerView
 
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".MapsActivity" />
 
+
     <ProgressBar
         android:id="@+id/pbc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/rvc"
-        app:layout_constraintStart_toStartOf="parent"></ProgressBar>
-
-    <Spinner
-        android:id="@+id/spinnerv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/pbc"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <TextView
-        android:id="@+id/nresultados"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="32sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></TextView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
-        app:cardCornerRadius="10dp"
-        app:cardPreventCornerOverlap="true"
+        android:textColor="@android:color/tab_indicator_text"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#EDFFFCFC"
-            android:orientation="vertical"
-            android:paddingStart="10sp"
-            android:paddingTop="5sp"
-            android:paddingEnd="10sp"
-            android:paddingBottom="5sp">
-
-            <LinearLayout
-                android:id="@+id/layHor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/labHorario"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_extrabold"
-                    android:text="Horario :"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/disHorario"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_extrabold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/laySer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/labServicios"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_extrabold"
-                    android:text="Servicios :"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/disServicios"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_extrabold" />
-            </LinearLayout>
-
-            <!--     <LinearLayout
-               android:id="@+id/layDir"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="horizontal">
-
-               <TextView
-                   android:id="@+id/labDirrecion"
-                   android:layout_width="100dp"
-                   android:layout_height="wrap_content"
-                   android:fontFamily="@font/montserrat_extrabold"
-                   android:text="Dirección :"
-                   android:textSize="16sp"
-                   android:textStyle="bold" />
-
-               <TextView
-                   android:id="@+id/disDirrecion"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:fontFamily="@font/montserrat_extrabold" />
-           </LinearLayout>
-
-               <LinearLayout
-                 android:id="@+id/layTran"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:orientation="horizontal">
-
-                 <TextView
-                     android:id="@+id/labTransporte"
-                     android:layout_width="100dp"
-                     android:layout_height="wrap_content"
-                     android:text="Transporte : " />
-
-                 <TextView
-                     android:id="@+id/disTransporte"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content" />
-           </LinearLayout>-->
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/map"
-        app:layout_constraintStart_toStartOf="parent">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toTopOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
