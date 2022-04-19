@@ -57,7 +57,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             "CENTROS CULTURALES",
             "WiFi GRATIS",
             "MUSEOS",
-            "EDIFICIOS MONUMENTALES",
             "PARQUES",
             "BIBLIOTECAS",
             "PISCINAS",

@@ -46,9 +46,6 @@ public class BuscarConApi extends AsyncTaskLoader<ResultList> {
         } else if (typeOfLocation.equals("MUSEOS")){
             endpoint = "201132-0-museos.json";
 
-        } else if (typeOfLocation.equals("EDIFICIOS MONUMENTALES")){
-            endpoint = "208844-0-monumentos-edificios.json";
-
         } else if (typeOfLocation.equals("MERCADILLOS")){
           endpoint = "202105-0-mercadillos.json";
 
