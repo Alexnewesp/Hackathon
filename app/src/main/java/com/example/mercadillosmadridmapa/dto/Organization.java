@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Organization {
 
-
     private String schedule;
     private String services;
     @JsonProperty("organization-desc")

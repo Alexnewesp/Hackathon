@@ -8,6 +8,7 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -98,20 +99,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void addressSelected(View view){
        btnAdd.setTypeface(Typeface.DEFAULT_BOLD);
+       btnAdd.setPaintFlags(btnAdd.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
         btnSer.setTypeface(Typeface.DEFAULT);
+        btnSer.setPaintFlags(0);
         btnHor.setTypeface(Typeface.DEFAULT);
+        btnHor.setPaintFlags(0);
         labDescription.setText(descAddress);
     }
     public void servicesSelected(View view){
         btnSer.setTypeface(Typeface.DEFAULT_BOLD);
+        btnSer.setPaintFlags(btnSer.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
         btnAdd.setTypeface(Typeface.DEFAULT);
+        btnAdd.setPaintFlags(0);
         btnHor.setTypeface(Typeface.DEFAULT);
+        btnHor.setPaintFlags(0);
         labDescription.setText(descServices);
     }
     public void horarioSelected(View view){
         btnHor.setTypeface(Typeface.DEFAULT_BOLD);
+        btnHor.setPaintFlags(btnHor.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
         btnSer.setTypeface(Typeface.DEFAULT);
+        btnSer.setPaintFlags(0);
         btnAdd.setTypeface(Typeface.DEFAULT);
+        btnAdd.setPaintFlags(0);
         labDescription.setText(descHorario);
     }
 
@@ -150,8 +160,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
            mMap.clear();
            btnAdd.setTypeface(Typeface.DEFAULT);
+           btnAdd.setPaintFlags(0);
            btnSer.setTypeface(Typeface.DEFAULT);
+           btnSer.setPaintFlags(0);
            btnHor.setTypeface(Typeface.DEFAULT);
+           btnHor.setPaintFlags(0);
            labDescription.setText("");
            //labTitle.setText("Info");
 
@@ -225,8 +238,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     descAddress = (listaPointOfInterest[i].getAddress().getStreetAddress() + "\n " + listaPointOfInterest[i].getAddress().getPostalCode());
 
                    btnAdd.setTypeface(Typeface.DEFAULT_BOLD);
+                   btnAdd.setPaintFlags(btnAdd.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
                    btnSer.setTypeface(Typeface.DEFAULT);
+                   btnSer.setPaintFlags(0);
                    btnHor.setTypeface(Typeface.DEFAULT);
+                   btnHor.setPaintFlags(0);
                    labDescription.setText(descAddress);
                }
 

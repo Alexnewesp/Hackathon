@@ -17,22 +17,17 @@ public class RedUtil {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
         {
-         //   Log.d(MainActivity.ETIQUETA_LOG, "Comprobando internet desde version >= 30");
             Network network = connectivityManager.getActiveNetwork();
             hay_internet = (network != null);
 
         } else {
 
-          //  Log.d(MainActivity.ETIQUETA_LOG, "Comprobando internet desde version < 30");
-            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+             NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
             if (networkInfo!=null)
             {
                 hay_internet = (networkInfo.isAvailable() && networkInfo.isConnected());
             }
-
         }
-
-
         return  hay_internet;
     }
 
@@ -45,7 +40,6 @@ public class RedUtil {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
         {
-        //    Log.d(MainActivity.ETIQUETA_LOG, "Comprobando internet desde version >= 30");
             Network network = connectivityManager.getActiveNetwork();
             if (network!=null)
             {
@@ -55,8 +49,6 @@ public class RedUtil {
 
 
         } else {
-
-          //  Log.d(MainActivity.ETIQUETA_LOG, "Comprobando internet desde version < 30");
             NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
             if (networkInfo!=null)
             {
@@ -64,12 +56,9 @@ public class RedUtil {
             }
 
         }
-
-
         return  hay_wifi;
     }
 
-    //solución antigua de stackoverflow https://stackoverflow.com/a/34741193/4067559
     public static boolean isWifiAvailable (Context context)
     {
         boolean br = false;

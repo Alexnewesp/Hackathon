@@ -8,7 +8,6 @@ public class Address {
 
     @JsonProperty("postal-code")
     private String postalCode;
-
     @JsonProperty("street-address")
     private String streetAddress;
 
@@ -35,4 +34,5 @@ public class Address {
     public void setStreetAddress(String streetAddress) {
         this.streetAddress= streetAddress;
     }
+
 }
